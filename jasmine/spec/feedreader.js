@@ -103,7 +103,7 @@ $(function() {
 		});
 	  });
 
-	  it("there is at list a single element", function(done) {
+	  it("there is at least a single element", function(done) {
 
 		const container = $('.feed .entry'),
 			title = $('h2');
