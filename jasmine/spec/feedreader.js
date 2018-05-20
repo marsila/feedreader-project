@@ -75,7 +75,7 @@ $(function() {
 
       // Click once
 	  menu.click();
-	  expect($('body').hasClass('menu-hidden')).not.toBe(true); //the menu disply when clicked
+	  expect($('body').hasClass('menu-hidden')).toBe(false); //the menu disply when clicked
       
       // Click again
 	  menu.click();
