@@ -75,11 +75,11 @@ $(function() {
 
       // Click once
 	  menu.click();
-	  expect($('body').attr('class')).toBe(''); //the menu disply when clicked
+	  expect($('body').hasClass('menu-hidden')).not.toBe(true); //the menu disply when clicked
       
       // Click again
 	  menu.click();
-	  expect($('body').attr('class')).toBe('menu-hidden'); //the menu hide when it'sclicked again
+	  expect($('body').hasClass('menu-hidden')).toBe(true); //the menu hide when it'sclicked again
 	  
     });
 
@@ -105,7 +105,7 @@ $(function() {
 
 	  it("there is at list a single element", function(done) {
 
-		const container = $('.feed'),
+		const container = $('.feed .entry'),
 			title = $('h2');
 			
 		expect(container).not.toBeEmpty();
@@ -121,18 +121,22 @@ $(function() {
    * by the loadFeed function that the content actually changes.
    * Remember, loadFeed() is asynchronous.
    */  
-      let currentContent;
+      let currentContent,
+	    newContent;
+	  
 	  beforeEach(function(done) {
-		currentContent = $('.feed').html();
-		loadFeed(1,function() {
-		  return done();
+		loadFeed(0, function(){
+			currentContent = $('.feed').html();
+			
+		    loadFeed(1,function() {	
+				newContent = $('.feed').html();
+				return done();
+			});
 		});
 	  });
 	  it("when a new feed is loaded by the loadFeed(), the content actually changes.", function(done) {
-
-		let newContent = $('.feed').html();			
-		expect(currentContent).not.toEqual(newContent);
-		
+          		
+		expect(currentContent).not.toEqual(newContent);		
 		done();
 	  });
 	  
